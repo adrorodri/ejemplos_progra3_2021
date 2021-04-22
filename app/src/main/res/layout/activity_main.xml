@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#402640"
+    android:background="#7E527E"
     tools:context=".MainActivity">
 
     <TextView
@@ -57,12 +57,12 @@
 
     <Button
         android:id="@+id/buttonSignIn"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:padding="25dp"
         android:text="Sign In"
         android:textSize="18sp"
@@ -76,20 +76,20 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="24dp"
-        app:tint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextTextEmailAddress"
-        app:srcCompat="@drawable/icon_mail" />
+        app:srcCompat="@drawable/icon_mail"
+        app:tint="#FFFFFF" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="24dp"
-        app:tint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPassword"
-        app:srcCompat="@drawable/icon_password" />
+        app:srcCompat="@drawable/icon_password"
+        app:tint="#FFFFFF" />
 
     <CheckBox
         android:id="@+id/checkBoxRememberMe"
