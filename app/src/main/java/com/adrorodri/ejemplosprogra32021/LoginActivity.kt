@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_login.*
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         println("onCreate MainActivity")
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
             for(user in validUsersList) {
                 if(user.username == username && user.password == password) {
-                    val intent = Intent(this, DetailsActivity::class.java)
+                    val intent = Intent(this, MainMenuActivity::class.java)
                     intent.putExtra("username", username)
                     intent.putExtra("password", password)
                     intent.putExtra("user", user)
