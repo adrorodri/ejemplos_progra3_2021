@@ -7,6 +7,14 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_menu.*
 
 class MainMenuActivity : AppCompatActivity() {
+    val requestCodeCarrito = 123
+
+    val productoHamburguesa = Producto(R.drawable.hamburguesa_1, "Hamburguesa Simple", 15.0, "Hamburguesa de 200g con queso y huevo")
+    val productoSalchipapa = Producto(R.drawable.salchipapa_1, "Salchipapa", 13.0, "Acompañada de aderezos")
+    val productoLomito = Producto(R.drawable.sandwich_lomito_1, "Sandwich de Lomito", 16.0, "Acompañado de aderezos")
+
+    var carritoDeCompras = CarritoDeCompras(listOf(productoHamburguesa, productoSalchipapa, productoLomito))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -19,9 +27,11 @@ class MainMenuActivity : AppCompatActivity() {
 
         textViewBienvenidos.text = "Bienvenido " + user.username
 
-        val productoHamburguesa = Producto(R.drawable.hamburguesa_1, "Hamburguesa Simple", 15.0, "Hamburguesa de 200g con queso y huevo")
-        val productoSalchipapa = Producto(R.drawable.salchipapa_1, "Salchipapa", 13.0, "Acompañada de aderezos")
-        val productoLomito = Producto(R.drawable.sandwich_lomito_1, "Sandwich de Lomito", 16.0, "Acompañado de aderezos")
+        var cantidad = 0
+        for(producto in carritoDeCompras.listaProductos){
+            cantidad += producto.cantidad
+        }
+        textViewCantidad.text = cantidad.toString()
 
         menuHamburguesas.setOnClickListener {
             val intent = Intent(this, ProductDetailsActivity::class.java)
@@ -38,8 +48,11 @@ class MainMenuActivity : AppCompatActivity() {
             intent.putExtra("producto", Gson().toJson(productoSalchipapa))
             startActivity(intent)
         }
-
-
+        imageViewShoppingCart.setOnClickListener {
+            val intent = Intent(this, ShoppingCartActivity::class.java)
+            intent.putExtra("carrito", Gson().toJson(carritoDeCompras))
+            startActivityForResult(intent, requestCodeCarrito)
+        }
     }
 
     override fun onStart() {
@@ -70,5 +83,16 @@ class MainMenuActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         println("onRestart DetailsActivity")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        carritoDeCompras = Gson().fromJson(data?.getStringExtra("carrito"), CarritoDeCompras::class.java)
+
+        var cantidad = 0
+        for(producto in carritoDeCompras.listaProductos){
+            cantidad += producto.cantidad
+        }
+        textViewCantidad.text = cantidad.toString()
     }
 }
