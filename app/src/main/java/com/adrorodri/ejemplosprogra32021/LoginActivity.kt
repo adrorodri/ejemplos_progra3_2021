@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
             Usuario("Lorito", "qwerty")
         )
 
-        buttonSignIn.text = "DESDE EL CODIGO!"
+        buttonSignIn.text = resources.getString(R.string.login)
         buttonSignIn.setOnClickListener {
             if(checkBoxRememberMe.isChecked) {
                 textViewForgotPassword.text = "CLICK EN BOTON! > REMEMBER ME ON"

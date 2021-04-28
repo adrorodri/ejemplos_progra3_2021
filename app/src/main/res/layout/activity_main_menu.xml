@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EAA95D"
+    android:background="@color/backgroundColor"
     tools:context=".MainMenuActivity">
 
     <TextView
@@ -22,10 +22,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/menuHamburguesas"
+        style="@style/MenuElementStyle"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toStartOf="@+id/menuLomitos"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +45,11 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/hamburguesa_1"
@@ -60,6 +65,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
+        android:background="@drawable/round_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/menuHamburguesas"
@@ -77,8 +83,11 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/sandwich_lomito_1"
@@ -93,6 +102,8 @@
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/round_background_gradient"
         app:layout_constraintEnd_toEndOf="@+id/menuHamburguesas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuHamburguesas">
@@ -109,8 +120,11 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/salchipapa_1"

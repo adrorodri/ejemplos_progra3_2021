@@ -1,10 +1,26 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeMainActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#74CD7D</item>
+        <item name="colorPrimaryDark">#74CD7D</item>
+        <item name="colorAccent">#74CD7D</item>
+    </style>
+
+    <style name="AppButtonCustomStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:height">@dimen/button_height</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="backgroundTint">@color/buttonColor</item>
+    </style>
+
+    <style name="MenuElementStyle">
+        <item name="android:background">@drawable/round_background_gradient</item>
+    </style>
 </resources>
