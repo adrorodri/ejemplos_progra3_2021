@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ejemplos Progra 3 2021</string>
+    <string name="app_name">Progra 3 Examples 2021</string>
     <string name="remember_me">Remember me</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot your password?</string>

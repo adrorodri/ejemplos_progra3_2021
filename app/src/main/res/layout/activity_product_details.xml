@@ -52,4 +52,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPrecio" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupOpcionesRefresco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescripcion">
+
+        <RadioButton
+            android:id="@+id/radioButtonCocaCola"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Coca Cola" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFanta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fanta" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAgua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agua" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

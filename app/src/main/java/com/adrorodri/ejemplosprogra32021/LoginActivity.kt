@@ -1,10 +1,13 @@
 package com.adrorodri.ejemplosprogra32021
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -21,9 +24,12 @@ class LoginActivity : AppCompatActivity() {
             Usuario("Lorito", "qwerty")
         )
 
+        val citiesList = listOf("LP", "OR", "PT", "CB", "SU", "TA", "PA", "BE", "SC")
+        spinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, citiesList)
+
         buttonSignIn.text = resources.getString(R.string.login)
         buttonSignIn.setOnClickListener {
-            if(checkBoxRememberMe.isChecked) {
+            if (checkBoxRememberMe.isChecked) {
                 textViewForgotPassword.text = "CLICK EN BOTON! > REMEMBER ME ON"
             } else {
                 textViewForgotPassword.text = "CLICK EN BOTON! > REMEMBER ME OFF"
@@ -32,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
             val username = editTextTextEmailAddress.text.toString()
             val password = editTextTextPassword.text.toString()
 
-            for(user in validUsersList) {
-                if(user.username == username && user.password == password) {
+            for (user in validUsersList) {
+                if (user.username == username && user.password == password) {
                     val intent = Intent(this, MainMenuActivity::class.java)
                     intent.putExtra("username", username)
                     intent.putExtra("password", password)
@@ -49,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         checkBoxRememberMe.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(checkBoxRememberMe.isChecked) {
+            if (checkBoxRememberMe.isChecked) {
                 textViewForgotPassword.text = "CHECKBOX CHANGED! > REMEMBER ME ON"
             } else {
                 textViewForgotPassword.text = "CHECKBOX CHANGED! > REMEMBER ME OFF"
@@ -59,6 +65,18 @@ class LoginActivity : AppCompatActivity() {
         editTextTextEmailAddress.doAfterTextChanged { textoNuevo ->
             textViewForgotPassword.text = "INPUT CHANGED! > " + textoNuevo
         }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBarHorizontal.progress = 30
+        }, 3000)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBarHorizontal.progress = 80
+        }, 5000)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBarHorizontal.progress = 100
+        }, 7000)
     }
 
     override fun onStart() {

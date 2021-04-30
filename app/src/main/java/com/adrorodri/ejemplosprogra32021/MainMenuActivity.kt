@@ -1,8 +1,10 @@
 package com.adrorodri.ejemplosprogra32021
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_menu.*
 
@@ -53,6 +55,22 @@ class MainMenuActivity : AppCompatActivity() {
             intent.putExtra("carrito", Gson().toJson(carritoDeCompras))
             startActivityForResult(intent, requestCodeCarrito)
         }
+        toolbar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.menuItemGoToShoppingCart -> {
+                    val intent = Intent(this, ShoppingCartActivity::class.java)
+                    intent.putExtra("carrito", Gson().toJson(carritoDeCompras))
+                    startActivityForResult(intent, requestCodeCarrito)
+                }
+                R.id.menuItemGoToMyFavorites -> {
+                    Toast.makeText(this, "Mis Favoritos", Toast.LENGTH_SHORT).show()
+                }
+                R.id.menuItemGoToAboutUs -> {
+                    Toast.makeText(this, "Acerca de Nosotros", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
     }
 
     override fun onStart() {
@@ -87,12 +105,16 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        carritoDeCompras = Gson().fromJson(data?.getStringExtra("carrito"), CarritoDeCompras::class.java)
+        if (resultCode == Activity.RESULT_OK) {
+            carritoDeCompras = Gson().fromJson(data?.getStringExtra("carrito"), CarritoDeCompras::class.java)
 
-        var cantidad = 0
-        for(producto in carritoDeCompras.listaProductos){
-            cantidad += producto.cantidad
+            var cantidad = 0
+            for(producto in carritoDeCompras.listaProductos){
+                cantidad += producto.cantidad
+            }
+            textViewCantidad.text = cantidad.toString()
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(this, "Carrito de compras cancelado", Toast.LENGTH_SHORT).show()
         }
-        textViewCantidad.text = cantidad.toString()
     }
 }

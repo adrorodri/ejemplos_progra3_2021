@@ -12,7 +12,7 @@
         <activity android:name=".ShoppingCartActivity"></activity>
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".MainMenuActivity"
-            android:theme="@style/AppThemeMainActivity"/>
+        android:theme="@style/AppThemeMainActivity"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

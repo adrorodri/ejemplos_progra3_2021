@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menuItemGoToShoppingCart"
+        android:title="Carrito de Compras"
+        android:iconTint="#FFFFFF"
+        android:icon="@drawable/icon_shopping_cart"
+        app:showAsAction="always"/>
+    <item android:id="@+id/menuItemGoToMyFavorites"
+        android:icon="@drawable/icon_heart"
+        android:title="Mis favoritos"
+        android:iconTint="#FFFFFF"
+        app:showAsAction="always"/>
+    <item android:id="@+id/menuItemGoToAboutUs"
+        android:title="Acerca de nosotros"/>
+</menu>
