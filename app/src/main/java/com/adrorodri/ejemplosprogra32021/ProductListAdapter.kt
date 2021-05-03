@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ProductListRecyclerViewAdapter(val listaProductos: List<Producto>): RecyclerView.Adapter<ViewHolder>() {
+class ProductListRecyclerViewAdapter(val listaProductos: MutableList<Producto>): RecyclerView.Adapter<ViewHolder>() {
 
     var clickListener: ((product: Producto) -> Unit)? = null
 
@@ -30,6 +30,12 @@ class ProductListRecyclerViewAdapter(val listaProductos: List<Producto>): Recycl
 
     fun setOnProductItemClickListener(productClickListener: (product: Producto) -> Unit) {
         clickListener = productClickListener
+    }
+
+    fun addProduct(product: Producto) {
+        listaProductos.add(product)
+//        notifyItemInserted(listaProductos.size - 1)
+        notifyDataSetChanged()
     }
 }
 

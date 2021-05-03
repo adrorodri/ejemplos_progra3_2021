@@ -18,7 +18,7 @@ class MainMenuActivity : AppCompatActivity() {
     val productoLomito = Producto(R.drawable.sandwich_lomito_1, "Sandwich de Lomito", 16.0, "Acompañado de aderezos")
     val productoSandwichPalta = Producto(R.drawable.sandwich_palta_1, "Sandwich de Palta", 10.0, "Acompañado de aderezos y Queso")
 
-    val listaProductos = listOf(productoHamburguesa, productoSalchipapa, productoLomito, productoSandwichPalta)
+    val listaProductos = mutableListOf(productoHamburguesa, productoSalchipapa, productoLomito, productoSandwichPalta)
 
     var carritoDeCompras = CarritoDeCompras(listOf(productoHamburguesa, productoSalchipapa, productoLomito))
 
@@ -87,6 +87,10 @@ class MainMenuActivity : AppCompatActivity() {
         recyclerViewProductos.adapter = adapter
         recyclerViewProductos.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
+        buttonAddProduct.setOnClickListener {
+            val productoAAgregar = Producto(R.drawable.salchipapa_1, "Salchipapa XXL", 60.0, "Acompañada de aderezos")
+            adapter.addProduct(productoAAgregar)
+        }
     }
 
     override fun onStart() {

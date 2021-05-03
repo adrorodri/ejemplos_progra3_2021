@@ -1,5 +1,6 @@
 package com.adrorodri.ejemplosprogra32021
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -43,6 +44,15 @@ class ProductDetailsActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
+
+        imageViewShare.setOnClickListener {
+            val textoParaCompartir = "Hey! Probaste ya ${producto.nombre}?? Pruebalo ahora en nuestra app Progra 3 Ejemplos"
+            val intentCompartir = Intent()
+            intentCompartir.action = Intent.ACTION_SEND
+            intentCompartir.type = "text/plain"
+            intentCompartir.putExtra(Intent.EXTRA_TEXT, textoParaCompartir)
+            startActivity(intentCompartir)
         }
     }
 }
