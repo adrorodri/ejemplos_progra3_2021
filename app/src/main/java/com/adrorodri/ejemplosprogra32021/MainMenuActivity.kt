@@ -1,6 +1,7 @@
 package com.adrorodri.ejemplosprogra32021
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -73,6 +74,10 @@ class MainMenuActivity : AppCompatActivity() {
                 }
                 R.id.menuItemGoToAboutUs -> {
                     Toast.makeText(this, "Acerca de Nosotros", Toast.LENGTH_SHORT).show()
+                }
+                R.id.menuItemImageCapture -> {
+                    val intent = Intent(this, ImageCaptureActivity::class.java)
+                    startActivity(intent)
                 }
             }
             true

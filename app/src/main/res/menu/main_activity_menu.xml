@@ -11,6 +11,8 @@
         android:title="Mis favoritos"
         android:iconTint="#FFFFFF"
         app:showAsAction="always"/>
+    <item android:id="@+id/menuItemImageCapture"
+        android:title="Image Capture"/>
     <item android:id="@+id/menuItemGoToAboutUs"
         android:title="Acerca de nosotros"/>
 </menu>
