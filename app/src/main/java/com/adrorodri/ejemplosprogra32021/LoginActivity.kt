@@ -12,17 +12,20 @@ import androidx.core.widget.doAfterTextChanged
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+
+    val sharedPreferencesManager = SharedPreferencesManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         println("onCreate MainActivity")
 
-        val validUsersList = listOf(
-            Usuario("Perrito", "12345"),
-            Usuario("Gatito", "password"),
-            Usuario("Lorito", "qwerty")
-        )
+//        val validUsersList = listOf(
+//            Usuario("Perrito", "12345"),
+//            Usuario("Gatito", "password"),
+//            Usuario("Lorito", "qwerty")
+//        )
 
         val citiesList = listOf("LP", "OR", "PT", "CB", "SU", "TA", "PA", "BE", "SC")
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, citiesList)
@@ -38,16 +41,27 @@ class LoginActivity : AppCompatActivity() {
             val username = editTextTextEmailAddress.text.toString()
             val password = editTextTextPassword.text.toString()
 
-            for (user in validUsersList) {
-                if (user.username == username && user.password == password) {
+//            for (user in validUsersList) {
+//                if (user.username == username && user.password == password) {
+//                    val intent = Intent(this, MainMenuActivity::class.java)
+//                    intent.putExtra("username", username)
+//                    intent.putExtra("password", password)
+//                    intent.putExtra("user", user)
+//                    startActivity(intent)
+//                    break
+//                } else {
+//                    Toast.makeText(this, "Login Incorrecto!", Toast.LENGTH_LONG).show()
+//                }
+//            }
+
+            val validUser = sharedPreferencesManager.obtenerUsuario(this)
+            if(validUser != null) {
+                if(validUser.username == username && validUser.password == password) {
                     val intent = Intent(this, MainMenuActivity::class.java)
                     intent.putExtra("username", username)
                     intent.putExtra("password", password)
-                    intent.putExtra("user", user)
+                    intent.putExtra("user", validUser)
                     startActivity(intent)
-                    break
-                } else {
-                    Toast.makeText(this, "Login Incorrecto!", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -64,6 +78,11 @@ class LoginActivity : AppCompatActivity() {
 
         editTextTextEmailAddress.doAfterTextChanged { textoNuevo ->
             textViewForgotPassword.text = "INPUT CHANGED! > " + textoNuevo
+        }
+
+        textViewRegistrar.setOnClickListener {
+            val intent = Intent(this, RegisterNewUserActivity::class.java)
+            startActivity(intent)
         }
 
         Handler(Looper.getMainLooper()).postDelayed({

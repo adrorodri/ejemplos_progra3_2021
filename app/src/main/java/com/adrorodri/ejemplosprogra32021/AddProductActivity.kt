@@ -7,19 +7,23 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
-import kotlinx.android.synthetic.main.activity_image_capture.*
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_add_product.*
 import java.io.File
 
-class ImageCaptureActivity : AppCompatActivity() {
+class AddProductActivity : AppCompatActivity() {
 
     val requestCodeGallery = 123
     val requestCodeCamera = 456
 
     var fileUri: Uri? = null
 
+    var gson: Gson = GsonBuilder().apply { registerTypeAdapter(Uri::class.java, UriAdapter()) }.create()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_image_capture)
+        setContentView(R.layout.activity_add_product)
 
         buttonCamera.setOnClickListener {
             val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),"imageCamera" + System.currentTimeMillis() + ".jpg")
@@ -37,12 +41,19 @@ class ImageCaptureActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(Intent.createChooser(intent, "Selecciona una imagen!"), requestCodeGallery)
         }
+
+        buttonAceptar.setOnClickListener {
+            val newProduct = Producto(fileUri, editTextNombre.text.toString(), editTextPrecio.text.toString().toDouble(), editTextDescripcion.text.toString())
+            TemporalStorage.listaProductos.add(newProduct)
+            finish()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == requestCodeGallery) {
             imageView.setImageURI(data?.data)
+            fileUri = data?.data
         } else if(requestCode == requestCodeCamera) {
             imageView.setImageURI(fileUri)
         }

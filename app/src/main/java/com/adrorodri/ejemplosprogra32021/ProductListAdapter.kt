@@ -42,6 +42,6 @@ class ProductListRecyclerViewAdapter(val listaProductos: MutableList<Producto>):
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(product: Producto) {
         itemView.findViewById<TextView>(R.id.textViewProductItem).text = product.nombre
-        itemView.findViewById<ImageView>(R.id.imageViewProductItem).setImageResource(product.imagen)
+        itemView.findViewById<ImageView>(R.id.imageViewProductItem).setImageURI(product.imagen)
     }
 }

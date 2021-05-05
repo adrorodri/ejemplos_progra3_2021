@@ -15,7 +15,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         val producto = Gson().fromJson(intent.getStringExtra("producto"), Producto::class.java)
 
         textViewNombreProducto.text = producto.nombre
-        imageViewProducto.setImageResource(producto.imagen)
+        imageViewProducto.setImageURI(producto.imagen)
         textViewPrecio.text = producto.precio.toString() + " $"
         textViewDescripcion.text = producto.descripcion
 
