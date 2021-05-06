@@ -2,26 +2,37 @@ package com.adrorodri.ejemplosprogra32021
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import com.google.gson.Gson
+import android.net.Uri
+import com.google.gson.GsonBuilder
 
 class SharedPreferencesManager {
-    fun crearUsuarioNuevo(context: Context, usuario: Usuario) {
-        val usuarioJson = Gson().toJson(usuario)
+    val gson = GsonBuilder().registerTypeAdapter(Uri::class.java, UriAdapter()).create()
 
-        val prefs = context.getSharedPreferences("datos", MODE_PRIVATE)
-        val prefsEditor = prefs.edit()
-        prefsEditor.putString("usuario", usuarioJson)
-        prefsEditor.apply()
+    fun crearUsuarioNuevo(context: Context, usuario: Usuario) {
+        val usuarioExistente =
+            obtenerUsuarios(context).find { usuarioRegistrado -> usuarioRegistrado.username == usuario.username }
+
+        if(usuarioExistente == null) {
+            val usuariosRegistrados = obtenerUsuarios(context).toMutableList()
+            usuariosRegistrados.add(usuario)
+
+            val usuariosRegistradosJson = gson.toJson(usuariosRegistrados)
+
+            val prefs = context.getSharedPreferences("datos", MODE_PRIVATE)
+            val prefsEditor = prefs.edit()
+            prefsEditor.putString("usuarios", usuariosRegistradosJson)
+            prefsEditor.apply()
+        }
     }
 
-    fun obtenerUsuario(context: Context): Usuario? {
+    fun obtenerUsuarios(context: Context): List<Usuario> {
         val prefs = context.getSharedPreferences("datos", MODE_PRIVATE)
-        val usuarioJson = prefs.getString("usuario", null)
-        if(usuarioJson != null) {
-            val usuario = Gson().fromJson(usuarioJson, Usuario::class.java)
-            return usuario
+        val usuarioJson = prefs.getString("usuarios", null)
+        if (usuarioJson != null) {
+            val usuarios: List<Usuario> = gson.fromJson(usuarioJson)
+            return usuarios
         } else {
-            return null
+            return listOf()
         }
     }
 }

@@ -2,8 +2,10 @@ package com.adrorodri.ejemplosprogra32021
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.gson.Gson
@@ -24,9 +26,11 @@ class MainMenuActivity : AppCompatActivity() {
         val usernameRecibido = intent.getStringExtra("username")
         val passwordRecibido = intent.getStringExtra("password")
 
-        val user = intent.getSerializableExtra("user") as Usuario
+//        val user = intent.getSerializableExtra("user") as Usuario
+        val user = TemporalStorage.usuario!!
 
         textViewBienvenidos.text = "Bienvenido " + user.username
+        imageViewUsuario.setImageURI(user.imageUri!!)
 
         var cantidad = 0
         for(producto in carritoDeCompras.listaProductos){

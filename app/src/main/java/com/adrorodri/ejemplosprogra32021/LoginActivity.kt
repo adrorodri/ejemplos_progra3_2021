@@ -1,15 +1,18 @@
 package com.adrorodri.ejemplosprogra32021
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import kotlinx.android.synthetic.main.activity_login.*
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,12 +23,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         println("onCreate MainActivity")
-
-//        val validUsersList = listOf(
-//            Usuario("Perrito", "12345"),
-//            Usuario("Gatito", "password"),
-//            Usuario("Lorito", "qwerty")
-//        )
 
         val citiesList = listOf("LP", "OR", "PT", "CB", "SU", "TA", "PA", "BE", "SC")
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, citiesList)
@@ -41,32 +38,21 @@ class LoginActivity : AppCompatActivity() {
             val username = editTextTextEmailAddress.text.toString()
             val password = editTextTextPassword.text.toString()
 
-//            for (user in validUsersList) {
-//                if (user.username == username && user.password == password) {
-//                    val intent = Intent(this, MainMenuActivity::class.java)
-//                    intent.putExtra("username", username)
-//                    intent.putExtra("password", password)
-//                    intent.putExtra("user", user)
-//                    startActivity(intent)
-//                    break
-//                } else {
-//                    Toast.makeText(this, "Login Incorrecto!", Toast.LENGTH_LONG).show()
-//                }
-//            }
-
-            val validUser = sharedPreferencesManager.obtenerUsuario(this)
-            if(validUser != null) {
+            val validUsers = sharedPreferencesManager.obtenerUsuarios(this)
+            for (validUser in validUsers) {
                 if(validUser.username == username && validUser.password == password) {
+                    TemporalStorage.usuario = validUser
                     val intent = Intent(this, MainMenuActivity::class.java)
                     intent.putExtra("username", username)
                     intent.putExtra("password", password)
-                    intent.putExtra("user", validUser)
                     startActivity(intent)
                 }
             }
 
             progressBar.visibility = View.VISIBLE
         }
+
+        requestPermissions()
 
         checkBoxRememberMe.setOnCheckedChangeListener { buttonView, isChecked ->
             if (checkBoxRememberMe.isChecked) {
@@ -126,5 +112,42 @@ class LoginActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         println("onRestart MainActivity")
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults, this
+        )
+    }
+
+    @AfterPermissionGranted(requestCodePermissions)
+    private fun requestPermissions() {
+        if (EasyPermissions.hasPermissions(this,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            // Already have permission, do the thing
+            // ...
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(
+                this,
+                "Se requieren permisos para usar la aplicacion",
+                requestCodePermissions,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        }
+    }
+
+    companion object {
+        const val requestCodePermissions = 1234
     }
 }

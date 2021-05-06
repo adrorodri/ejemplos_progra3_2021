@@ -11,14 +11,14 @@
         android:id="@+id/textViewBienvenidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
         android:text="Bienvenido Perrito"
         android:textColor="#FFFFFF"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUsuario"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUsuario"
+        app:layout_constraintTop_toTopOf="@+id/imageViewUsuario" />
 
     <ImageView
         android:id="@+id/imageViewShoppingCart"
@@ -70,8 +70,10 @@
         android:layoutAnimation="@anim/recycler_view_animation"
         app:layout_constraintBottom_toTopOf="@+id/imageViewShoppingCart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBienvenidos" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUsuario"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/buttonAddProduct"
@@ -83,5 +85,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/icon_plus" />
+
+    <ImageView
+        android:id="@+id/imageViewUsuario"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
