@@ -18,6 +18,8 @@ class MainMenuActivity : AppCompatActivity() {
 
     val adapter = ProductListRecyclerViewAdapter(TemporalStorage.listaProductos)
 
+    val sharedPreferencesManager = SharedPreferencesManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -59,6 +61,10 @@ class MainMenuActivity : AppCompatActivity() {
                 R.id.menuItemImageCapture -> {
                     val intent = Intent(this, AddProductActivity::class.java)
                     startActivity(intent)
+                }
+                R.id.menuItemSignOut -> {
+                    sharedPreferencesManager.borrarUsuarioInicioSesion(this)
+                    finish()
                 }
             }
             true

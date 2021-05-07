@@ -41,6 +41,9 @@ class LoginActivity : AppCompatActivity() {
             val validUsers = sharedPreferencesManager.obtenerUsuarios(this)
             for (validUser in validUsers) {
                 if(validUser.username == username && validUser.password == password) {
+                    if(checkBoxRememberMe.isChecked) {
+                        sharedPreferencesManager.guardarUsuarioInicioSesion(this, validUser)
+                    }
                     TemporalStorage.usuario = validUser
                     val intent = Intent(this, MainMenuActivity::class.java)
                     intent.putExtra("username", username)
@@ -82,6 +85,15 @@ class LoginActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             progressBarHorizontal.progress = 100
         }, 7000)
+
+        val usuarioInicioSesion = sharedPreferencesManager.obtenerUsuarioInicioSesion(this)
+        if(usuarioInicioSesion != null) {
+            TemporalStorage.usuario = usuarioInicioSesion
+            val intent = Intent(this, MainMenuActivity::class.java)
+            intent.putExtra("username", usuarioInicioSesion.username)
+            intent.putExtra("password", usuarioInicioSesion.password)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {

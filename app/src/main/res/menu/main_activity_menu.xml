@@ -15,4 +15,6 @@
         android:title="Image Capture"/>
     <item android:id="@+id/menuItemGoToAboutUs"
         android:title="Acerca de nosotros"/>
+    <item android:id="@+id/menuItemSignOut"
+        android:title="Cerrar sesion"/>
 </menu>
